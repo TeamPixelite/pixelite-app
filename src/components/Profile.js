@@ -22,7 +22,37 @@ import { bindActionCreators } from 'redux';
 import * as ProfileActions from '../actions';
 import UserMapModal from './UserMapModal';
 
-
+const sampleSavedStories = [{
+  title: "Hola como estas",
+  city: "Rio de Janeiro",
+  country: "Brazil",
+  coordinates: {
+    latitude: -22.9068467,
+    longitude: -43.17289650000001,
+  },
+  travelPeriod: "2 Feb - 4 Mar 2014",
+  coverPhotoUrl: "https://cache-graphicslib.viator.com/graphicslib/thumbs360x240/2484/SITours/corcovado-mountain-and-christ-redeemer-statue-half-day-tour-in-rio-de-janeiro-128058.jpg",
+}, {
+  title: "First time in Spain",
+  city: "Madrid",
+  country: "Spain",
+  coordinates: {
+    latitude: 40.4167754,
+    longitude: -3.7037902,
+  },
+  travelPeriod: "15-28 Jan 2016",
+  coverPhotoUrl: "https://www.amawaterways.com/Assets/CruiseGallery/Large/provencespain_barcelona_parcguell_ss_407568172_gallery.jpg",
+}, {
+  title: "Honeymoon in Africa",
+  city: "Cape Town",
+  country: "South Africa",
+  coordinates: {
+    latitude: -33.9248685,
+    longitude: 18.4240553,
+  },
+  travelPeriod: "24-30 Sep 2013",
+  coverPhotoUrl: "https://images.fineartamerica.com/images-medium-large/lions-head-sunset-johaar-bassier.jpg",
+}]
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -35,9 +65,10 @@ class Profile extends React.Component {
       index: 0,
       routes: [
         { key: 'stories', title: `${this.props.stories.length} STORIES` },
-        { key: 'saved', title: '2 SAVED' },
+        { key: 'saved', title: '3 SAVED' },
       ],
       stories: this.props.stories,
+      saved: sampleSavedStories,
     };
 
     this.handleIndexChange = this.handleIndexChange.bind(this);
@@ -46,9 +77,10 @@ class Profile extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       stories: nextProps.stories,
+      saved: sampleSavedStories,
       routes: [
         { key: 'stories', title: `${nextProps.stories.length} STORIES` },
-        { key: 'saved', title: 'SAVED' },
+        { key: 'saved', title: '3 SAVED' },
       ],
     });
   }
@@ -91,7 +123,7 @@ class Profile extends React.Component {
         return (
           <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={{ marginBottom: windowWidth * 0.03 }}>
-              {this.renderImagesInGroups()}
+              {this.renderStoriesImagesInGroups()}
             </View>
           </ScrollView>
         );
@@ -99,7 +131,7 @@ class Profile extends React.Component {
         return (
           <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={{ marginBottom: windowWidth * 0.03 }}>
-              {this.renderImagesInGroups()}
+              {this.renderSavedImagesInGroups()}
             </View>
           </ScrollView>
         );
@@ -202,8 +234,18 @@ class Profile extends React.Component {
     })
   }
 
-  renderImagesInGroups() {
+  renderStoriesImagesInGroups() {
     return this.renderChunk(this.state.stories).map((storiesForRow, index) => {
+      return (
+        <View style={{margin: 0, flexDirection: "row"}} key={index}>
+          {this.renderRow(storiesForRow, index)}
+        </View>
+      )
+    })
+  }
+
+  renderSavedImagesInGroups() {
+    return this.renderChunk(this.state.saved).map((storiesForRow, index) => {
       return (
         <View style={{margin: 0, flexDirection: "row"}} key={index}>
           {this.renderRow(storiesForRow, index)}
@@ -220,6 +262,9 @@ class Profile extends React.Component {
     let { index, routes, isUserMapClicked } = this.state;
     return (
       <View style={{ flex: 1 }}>
+        <StatusBar
+          barStyle='dark-content'
+        />
         <View style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 120, paddingTop: 25, backgroundColor: "white",
           justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
           <Image

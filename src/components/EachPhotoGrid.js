@@ -11,8 +11,6 @@ import { bindActionCreators } from 'redux';
 import * as PhotoGridActions from '../actions';
 import { GOOGLE_PLACES_API_KEY } from '../../apis'
 
-// import { GOOGLE_PLACES_API_KEY } from '../../apis';
-
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -66,10 +64,10 @@ class EachPhotoGrid extends Component {
           return true;
         }
       })
-      console.log("THIS IS INSDE! ARRAY" , array, " STATES CURRENT URL ", currentPhotoUrl );
+      console.log("THIS IS INSIDE! ARRAY" , array, " STATES CURRENT URL ", currentPhotoUrl );
       return index;
     }
-    console.log("THIS IS GETTING CHENGESD!!! : ", getIndexFromSlide(this.state.allPhotos));
+    console.log("THIS IS GETTING CHANGED!!! : ", getIndexFromSlide(this.state.allPhotos));
 
     this.setState({
       currentPhotoUrl,
@@ -81,6 +79,27 @@ class EachPhotoGrid extends Component {
 
   // searchPlacesPopupToggle() {
   //   this.props.photoGridToggleSearchPlaces();
+  // }
+
+  // deletePhoto(currentPhotoUrl) {
+  //   const {dates, selectedPhotos} = this.props;
+  //   if (dates.length === 1 && selectedPhotos[dates[0]].length === 1) {
+  //     console.log("CANNOT DELETE");
+  //     Alert.alert(
+  //       'Cannot delete photo',
+  //       'You should have at least one photo in your story',
+  //       [
+  //         { text: 'OK', onPress: () => console.log('OK Pressed')}
+  //       ]
+  //     );
+  //     return;
+  //   } else {
+  //     console.log("WILL DELETE")
+  //     this.props.photoGridDeletePhoto(currentPhotoUrl);
+  //   }
+  //   if (this.props.photosList.length) {
+  //     this.photoPopupToggle();
+  //   }
   // }
 
   renderPhotoRow(rowItem, rowIndex) {
@@ -267,7 +286,6 @@ class EachPhotoGrid extends Component {
     )
   }
 
-
   getIndexFromSlide(allPhotos) {
     let index;
     allPhotos.find((element,i) => {
@@ -278,8 +296,6 @@ class EachPhotoGrid extends Component {
     })
     return index;
   }
-
-
 
   render() {
     return (
@@ -307,17 +323,17 @@ class EachPhotoGrid extends Component {
                 />
               </View>
 {/* Icon 2 TOP */}
-              {/* <View style={{ position: "absolute", alignItems: "flex-end", top: 10, right: 45, zIndex: 10, width: 38, height: 38 }}>
+              {/* <View style={{ position: "absolute", alignItems: "flex-end", top: 10, right: 55, zIndex: 10, width: 38, height: 38 }}>
                 <Icon
-                  type="simple-line-icon"
-                  name="notebook"
+                  type="material-community"
+                  name="image-filter"
                   color="white"
-                  size={22}
+                  size={23}
                   onPress={() => Alert.alert(
                     "Change story cover",
                     "Do you want to change your story cover to this photo?",
                     [{
-                      text: "Nah",
+                      text: "Cancel",
                       onPress: () => console.log("Cancel Pressed"), style: "cancel"
                     }, {
                       text: "Yes",
@@ -327,17 +343,17 @@ class EachPhotoGrid extends Component {
                 />
               </View> */}
 {/* Icon 3 TOP */}
-              {/* <View style={{ position: 'absolute', alignItems: 'flex-end', top: 9, right: 10, zIndex: 10, width: 38, height: 38 }}>
+              {/* <View style={{ position: 'absolute', alignItems: 'flex-end', top: 9, right: 15, zIndex: 10, width: 38, height: 38 }}>
                 <Icon
-                  type="simple-line-icon"
-                  name="trash"
+                  type="font-awesome"
+                  name="trash-o"
                   color="white"
-                  size={23}
+                  size={24}
                   onPress={() => Alert.alert(
                     'Delete photo',
                     'Are you sure you want to delete this photo?',
                     [{
-                      text: 'Nah',
+                      text: 'Cancel',
                       onPress: () => console.log('Cancel Pressed'), style: 'cancel'
                     }, {
                       text: 'Yes',
@@ -349,7 +365,7 @@ class EachPhotoGrid extends Component {
                 />
               </View> */}
 {/* Gallery Starts */}
-                  {console.log("THIS IS IT !!! : " ,this.props.currentPhotoIndex )}
+                {console.log("CURRENT PHOTO INDEX : " ,this.props.currentPhotoIndex )}
                 <Gallery
                   style={{ backgroundColor: '#2d2d2d' }}
                   images={this.state.allPhotos}
@@ -358,13 +374,13 @@ class EachPhotoGrid extends Component {
                 />
 {/* Currnet Photo Place Display */}
                 {!this.props.currentPhotoPlace
-                  ?
-                  <View
-                    style={{
-                      position: 'absolute', justifyContent: 'center', alignItems: 'center',
-                      bottom: 0, zIndex: 10, width: '100%', height: 40, backgroundColor: '#1d1d1d'
-                    }}
-                  />
+                  ? null
+                  // <View
+                  //   style={{
+                  //     position: 'absolute', justifyContent: 'center', alignItems: 'center',
+                  //     bottom: 0, zIndex: 10, width: '100%', height: 40, backgroundColor: '#1d1d1d'
+                  //   }}
+                  // />
                     // {/* <TouchableOpacity
                     //   style={{ flexDirection: 'row' }}
                     //   onPress={() => this.searchPlacesPopupToggle()}
@@ -415,7 +431,7 @@ class EachPhotoGrid extends Component {
                   hidden={true}
                 />
                 <View style={{ flexDirection: 'row', width: '100%', height: 42 }}>
-                  <View style={{ position: 'absolute', alignItems: 'flex-start', top: 8, left: 8, width: '50%', height: 34 }}>
+                  <View style={{ position: 'absolute', alignItems: 'flex-start', top: 8, left: 8, width: 33, height: 33 }}>
                     <Icon
                       type="material-community"
                       name="close"
@@ -426,7 +442,12 @@ class EachPhotoGrid extends Component {
                         this.searchPlacesPopupToggle()}}
                     />
                   </View>
-                  <View style={{ position: 'absolute', alignItems: 'flex-end', top: 8, right: 8, width: '50%', height: 34 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: 42, zIndex: -1 }}>
+                    <Text style={{ color: '#2d2d2d', fontFamily: 'Avenir', fontSize: 18 }}>
+                      Locations
+                    </Text>
+                  </View>
+                  <View style={{ position: 'absolute', alignItems: 'flex-end', top: 8, right: 8, width: 33, height: 33 }}>
                     <Icon
                       type="material-community"
                       name="check"
@@ -440,7 +461,7 @@ class EachPhotoGrid extends Component {
                   </View>
                 </View>
                 <GooglePlacesAutocomplete
-                  placeholder='Search Location'
+                  placeholder='Search location'
                   minLength={2} // minimum length of text to search
                   autoFocus={false}
                   returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
@@ -448,7 +469,7 @@ class EachPhotoGrid extends Component {
                   fetchDetails={true}
                   renderDescription={(row) => row.description} // custom description render
                   onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                    const placeName = data.description;
+                    const placeName = data.description.split(', ')[0];
                     const coordinates = details.geometry.location;
                     this.props.photoGridUpdateTempPlace(placeName, coordinates);
                   }}

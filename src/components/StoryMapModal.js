@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { Text, View, Dimensions, StyleSheet,StatusBar } from 'react-native';
+import { Text, View, Dimensions, StyleSheet, StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import MapView from 'react-native-maps';
 

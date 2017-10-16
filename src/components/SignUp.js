@@ -2,17 +2,20 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import { Icon, Button } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient';
 import * as ActionsFunctions from '../actions';
 
 import FloatingLabelInput from './common/FloatingLabelInput';
 
 const styles = {
   errorTextStyle: {
-    fontSize: 16,
     alignSelf: 'center',
+    margin: 2,
     color: 'red',
+    fontSize: 13,
+    fontFamily: 'Avenir',
   },
 };
 
@@ -36,15 +39,24 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: 'white'
-      }}>
+      <LinearGradient
+        start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+        // colors={['#b4b4b4', '#7d7b7a', '#535251']}
+        colors={['#f9855a', '#eb3d3d', '#fe161d']}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <StatusBar
+          barStyle='light-content'
+        />
       <View style={{ position: 'absolute', top: 25, left: 8, justifyContent: 'center', alignItems: 'flex-start', width: 30, height: 30, zIndex: 10 }}>
         <Icon
           type="simple-line-icon"
           name="arrow-left"
-          color="#373535"
+          color="white"
           size={24}
           onPress={() => Actions.pop()}
         />
@@ -52,13 +64,16 @@ class SignUp extends React.Component {
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{
           fontSize: 20,
-          margin: 10,
+          marginTop: 30,
+          backgroundColor: 'transparent',
+          color: 'white',
           fontFamily: 'Avenir',
+          fontWeight: 'bold',
           textAlign: 'center'
         }}>
-          Sign Up
+          Create an Account
         </Text>
-        <View style={{margin: 50}}>
+        <View style={{margin: 30}}>
           <View style={{margin: 7}}>
             <FloatingLabelInput
               label="Name"
@@ -82,15 +97,20 @@ class SignUp extends React.Component {
               {this.props.error}
             </Text>
             <Button
-              backgroundColor="#03A9F4"
-              title="SIGN UP"
-              style={{ marginVertical: 20 }}
+              buttonStyle={{ marginTop: 20, width: 250, height: 40, borderWidth: 1, borderColor: 'white', alignSelf: 'center' }}
+              backgroundColor="white"
+              borderRadius={20}
+              title="Sign Up"
+              color="#fe161d"
+              fontFamily="Avenir"
+              fontWeight="bold"
+              fontSize={16}
               onPress={this.onSignUpButtonPress.bind(this)}
             />
           </View>
         </View>
       </View>
-    </View>
+    </LinearGradient>
     );
   }
 }

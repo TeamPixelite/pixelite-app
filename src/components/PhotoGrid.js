@@ -288,7 +288,6 @@ class PhotoGrid extends Component {
     )
   }
 
-
   getIndexFromSlide(allPhotos) {
     let index;
     allPhotos.find((element,i) => {
@@ -299,8 +298,6 @@ class PhotoGrid extends Component {
     })
     return index;
   }
-
-
 
   render() {
     return (
@@ -328,17 +325,17 @@ class PhotoGrid extends Component {
                 />
               </View>
 {/* Icon 2 TOP */}
-              <View style={{ position: "absolute", alignItems: "flex-end", top: 10, right: 45, zIndex: 10, width: 38, height: 38 }}>
+              <View style={{ position: 'absolute', alignItems: 'flex-end', top: 10, right: 55, zIndex: 10, width: 38, height: 38 }}>
                 <Icon
-                  type="simple-line-icon"
-                  name="notebook"
+                  type="material-community"
+                  name="image-filter"
                   color="white"
-                  size={22}
+                  size={23}
                   onPress={() => Alert.alert(
                     "Change story cover",
                     "Do you want to change your story cover to this photo?",
                     [{
-                      text: "Nah",
+                      text: "Cancel",
                       onPress: () => console.log("Cancel Pressed"), style: "cancel"
                     }, {
                       text: "Yes",
@@ -348,17 +345,17 @@ class PhotoGrid extends Component {
                 />
               </View>
 {/* Icon 3 TOP */}
-              <View style={{ position: 'absolute', alignItems: 'flex-end', top: 9, right: 10, zIndex: 10, width: 38, height: 38 }}>
+              <View style={{ position: 'absolute', alignItems: 'flex-end', top: 9, right: 15, zIndex: 10, width: 38, height: 38 }}>
                 <Icon
-                  type="simple-line-icon"
-                  name="trash"
+                  type="font-awesome"
+                  name="trash-o"
                   color="white"
-                  size={23}
+                  size={24}
                   onPress={() => Alert.alert(
                     'Delete photo',
                     'Are you sure you want to delete this photo?',
                     [{
-                      text: 'Nah',
+                      text: 'Cancel',
                       onPress: () => console.log('Cancel Pressed'), style: 'cancel'
                     }, {
                       text: 'Yes',
@@ -370,7 +367,6 @@ class PhotoGrid extends Component {
                 />
               </View>
 {/* Gallery Starts */}
-                  {console.log("THIS IS IT !!! : " ,this.props.currentPhotoIndex )}
                 <Gallery
                   style={{ backgroundColor: '#2d2d2d' }}
                   images={this.state.allPhotos}
@@ -437,18 +433,23 @@ class PhotoGrid extends Component {
                   hidden={true}
                 />
                 <View style={{ flexDirection: 'row', width: '100%', height: 42 }}>
-                  <View style={{ position: 'absolute', alignItems: 'flex-start', top: 8, left: 8, width: '50%', height: 34 }}>
+                  <View style={{ position: 'absolute', alignItems: 'flex-start', top: 8, left: 8, width: 33, height: 33 }}>
                     <Icon
                       type="material-community"
                       name="close"
                       color="#2d2d2d"
                       size={26}
                       onPress={() => {
-                        this.photoGridCancelUpdateLocation();
+                        this.props.photoGridCancelUpdateLocation();
                         this.searchPlacesPopupToggle()}}
                     />
                   </View>
-                  <View style={{ position: 'absolute', alignItems: 'flex-end', top: 8, right: 8, width: '50%', height: 34 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', height: 42, zIndex: -1 }}>
+                    <Text style={{ color: '#2d2d2d', fontFamily: 'Avenir', fontSize: 18 }}>
+                      Locations
+                    </Text>
+                  </View>
+                  <View style={{ position: 'absolute', alignItems: 'flex-end', top: 8, right: 8, width: 33, height: 33 }}>
                     <Icon
                       type="material-community"
                       name="check"
@@ -462,7 +463,7 @@ class PhotoGrid extends Component {
                   </View>
                 </View>
                 <GooglePlacesAutocomplete
-                  placeholder='Search Location'
+                  placeholder='Search location'
                   minLength={2} // minimum length of text to search
                   autoFocus={false}
                   returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
@@ -470,7 +471,7 @@ class PhotoGrid extends Component {
                   fetchDetails={true}
                   renderDescription={(row) => row.description} // custom description render
                   onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                    const placeName = data.description;
+                    const placeName = data.description.split(', ')[0];
                     const coordinates = details.geometry.location;
                     this.props.photoGridUpdateTempPlace(placeName, coordinates);
                   }}

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, Image, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements'
-import { emailChanged, passwordChanged, loginUser, signUpUser } from '../actions';
-// import { Card, CardSection, Input, Button, Spinner } from './common';
-// import { GoogleAuthButton } from './AuthButtons';
+import LinearGradient from 'react-native-linear-gradient';
 
+import { emailChanged, passwordChanged, loginUser, signUpUser } from '../actions';
 import FloatingLabelInput from './common/FloatingLabelInput';
 
 const styles = {
   errorTextStyle: {
-    fontSize: 16,
     alignSelf: 'center',
+    margin: 2,
     color: 'red',
+    fontSize: 13,
+    fontFamily: 'Avenir',
   },
 };
 
@@ -32,51 +33,34 @@ class Login extends Component {
     Actions.signup();
   }
 
-
-  // renderButtonLogin() {
-  //   if (this.props.loading) {
-  //     return <Spinner size="large" />;
-  //   }
-  //   return (
-  //     <Button onPress={this.onButtonPress.bind(this)}>
-  //       Login
-  //     </Button>
-  //   );
-  // }
-  // renderButtonSignUp() {
-  //   if (this.props.loading) {
-  //     return <Spinner size="large" />;
-  //   }
-  //   return (
-  //     <Button onPress={this.onSignUpButtonPress.bind(this)}>
-  //       SignUp
-  //     </Button>
-  //   );
-  // }
-  // renderButtonGoogleAuth() {
-  //   return (
-  //     <GoogleAuthButton onPress={this.onGoogleAuthButtonPress.bind(this)}>
-  //       Google +
-  //     </GoogleAuthButton>
-  //   )
-  // }
   render() {
     return (
-      <View style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
-      }}>
+      <LinearGradient
+        start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+        // colors={['#f6c377', '#e48832', '#ffb000']}
+        colors={['#f9855a', '#eb3d3d', '#fe161d']}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <StatusBar
+          barStyle='light-content'
+        />
+        <Image source={require('../images/pixelite_logo_white.png')} style={{ width: 80, height: 80 }}/>
         <Text style={{
-          fontSize: 20,
+          fontSize: 25,
           margin: 10,
+          color: 'white',
           fontFamily: 'Avenir',
-          textAlign: 'center'
+          fontWeight: 'bold',
+          textAlign: 'center',
+          backgroundColor: 'transparent'
         }}>
-          Welcome to Pixelite!
+          Welcome to Pixelite
         </Text>
-        <View style={{margin: 50}}>
+        <View style={{margin: 20}}>
           <View style={{margin: 7}}>
             <FloatingLabelInput
               autoCapitalize={'none'}
@@ -94,57 +78,35 @@ class Login extends Component {
             <Text style={styles.errorTextStyle}>
               {this.props.error}
             </Text>
+          </View>
             <Button
-              backgroundColor="#03A9F4"
-              title="LOG IN"
-              style={{ marginVertical: 20 }}
+              buttonStyle={{ width: 250, height: 40, borderWidth: 1, borderColor: 'white', alignSelf: 'center' }}
+              backgroundColor="transparent"
+              borderRadius={20}
+              title="Log In"
+              fontFamily="Avenir"
+              fontSize={16}
               onPress={this.onButtonPress.bind(this)}
             />
-          </View>
-          <Text style={{ fontSize: 20, textAlign: 'center', alignItems: 'center', marginBottom: 10 }}>OR</Text>
           <View style={{margin: 7}}>
+            <Text style={{ backgroundColor: 'transparent', color: 'white', fontFamily: 'Avenir', fontSize: 14, textAlign: 'center', alignItems: 'center', marginTop: 15, marginBottom: 7 }}>
+              Don't have an account yet?
+            </Text>
+
             <Button
-              backgroundColor="#03A9F4"
-              title="SIGN UP"
+              buttonStyle={{ width: 250, height: 40, borderWidth: 1, borderColor: 'white', alignSelf: 'center' }}
+              icon={{name: 'user', type: 'simple-line-icon'}}
+              backgroundColor="transparent"
+              borderRadius={20}
+              title="Sign Up"
+              color="white"
+              fontFamily="Avenir"
+              fontSize={16}
               onPress={this.onSignUpButtonPress.bind(this)}
             />
           </View>
         </View>
-      </View>
-      // <Card>
-      //   <CardSection>
-      //     <Input
-      //       autoCapitalize="none"
-      //       label="Email"
-      //       placeholder="email@gmail.com"
-      //       onChangeText={this.onEmailChange.bind(this)} // this -> LoginFrom
-      //       value={this.props.email}
-      //     />
-      //   </CardSection>
-      //   <CardSection>
-      //     <Input
-      //       secureTextEntry
-      //       label="Password"
-      //       placeholder="password"
-      //       onChangeText={this.onPasswordChange.bind(this)}
-      //       value={this.props.password}
-      //     />
-      //   </CardSection>
-      //
-      //   <Text style={styles.errorTextStyle}>
-      //     {this.props.error}
-      //   </Text>
-      //
-      //   <CardSection>
-      //     {this.renderButtonLogin()}
-      //     {this.renderButtonSignUp()}
-      //   </CardSection>
-      //
-      //   <CardSection>
-      //     {this.renderButtonGoogleAuth()}
-      //   </CardSection>
-      //
-      // </Card>
+      </LinearGradient>
     );
   }
 }

@@ -30,21 +30,22 @@ export default class FloatingLabelInput extends React.Component {
       position: 'absolute',
       left: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [5, 0],
+        outputRange: [3, 0],
       }),
       top: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [20, 0],
+        outputRange: [17, 0],
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [20, 14],
+        outputRange: [17, 14],
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#555', '#777'],
+        outputRange: ['white', 'white'],
       }),
       fontFamily: 'Avenir',
+      backgroundColor: 'transparent'
     };
     return (
       <View style={{ paddingTop: 20 }}>
@@ -53,7 +54,7 @@ export default class FloatingLabelInput extends React.Component {
         </Animated.Text>
         <TextInput
           {...props}
-          style={{ width: 280, height: 26, fontSize: 20, fontFamily: 'Avenir', color: '#555', borderBottomWidth: 1, borderBottomColor: '#aaa' }}
+          style={{ marginBottom: 10, width: 280, height: 30, fontSize: 17, fontFamily: 'Avenir', color: 'white', borderBottomWidth: 1, borderBottomColor: 'white' }}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           blurOnSubmit

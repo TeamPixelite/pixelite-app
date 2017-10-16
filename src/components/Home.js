@@ -11,7 +11,8 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
-  Modal
+  Modal,
+  StatusBar
 } from 'react-native';
 
 import { Icon, SearchBar, Divider } from "react-native-elements";
@@ -19,7 +20,17 @@ import axios from 'react-native-axios';
 
 import EachStory from './EachStory';
 
-const sampleStories = [{
+const sampleStories1 = [{
+  title: "Honeymoon in Africa",
+  city: "Cape Town",
+  country: "South Africa",
+  coordinates: {
+    latitude: -33.9248685,
+    longitude: 18.4240553,
+  },
+  travelPeriod: "24-30 Sep 2013",
+  coverPhotoUrl: "https://images.fineartamerica.com/images-medium-large/lions-head-sunset-johaar-bassier.jpg",
+}, {
   title: "Backpacking in Straya",
   city: "Melbourne",
   country: "Australia",
@@ -29,35 +40,6 @@ const sampleStories = [{
   },
   travelPeriod: "20-27 Dec 2016",
   coverPhotoUrl: "https://www.realestate.com.au/neighbourhoods/content/suburb/editorial/vic/melbourne-3000/intro01-2.jpg",
-  items: [{
-    date: "19 Dec 2016",
-    filename: "IMG_0026.JPG",
-    url: "https://s3.us-east-2.amazonaws.com/pixelite-s3/uploads/BD53A516-B9DD-420D-AED7-DE78C4FA8B20.jpg",
-    width: 2448,
-    height: 3264,
-    location: {
-      placeName: "St Kilda beach, Melbourne, Victoria, Australia",
-      coordinates: {
-        latitude: -37.8678765,
-        longitude: 144.9740049,
-      },
-    },
-    tags: ["beach", "tree"],
-  }, {
-    date: "6 Jul 2017",
-    filename: "IMG_0024.JPG",
-    url: "https://s3.us-east-2.amazonaws.com/pixelite-s3/uploads/A08822CD-3943-437C-AC60-176884F76DEB.jpg",
-    width: 3024,
-    height: 3024,
-    location: {
-      placeName: "Chin Chin, Flinders Lane, Melbourne, Victoria, Australia",
-      coordinates: {
-        latitude: -37.815614,
-        longitude: 144.970377,
-      },
-    },
-    tags: ["bar", "food"],
-  }],
 }, {
   title: "Japan with besties",
   city: "Tokyo",
@@ -69,26 +51,6 @@ const sampleStories = [{
   travelPeriod: "30 Jul - 15 Aug 2017",
   coverPhotoUrl: "https://shoutem.github.io/static/getting-started/restaurant-3.jpg",
 }, {
-  title: "First time in Spain",
-  city: "Madrid",
-  country: "Spain",
-  coordinates: {
-    latitude: 40.4167754,
-    longitude: -3.7037902,
-  },
-  travelPeriod: "15-28 Jan 2016",
-  coverPhotoUrl: "https://www.amawaterways.com/Assets/CruiseGallery/Large/provencespain_barcelona_parcguell_ss_407568172_gallery.jpg",
-}, {
-  title: "Honeymoon in Africa",
-  city: "Cape Town",
-  country: "South Africa",
-  coordinates: {
-    latitude: -33.9248685,
-    longitude: 18.4240553,
-  },
-  travelPeriod: "24-30 Sep 2013",
-  coverPhotoUrl: "https://images.fineartamerica.com/images-medium-large/lions-head-sunset-johaar-bassier.jpg",
-}, {
   title: "Hola como estas",
   city: "Rio de Janeiro",
   country: "Brazil",
@@ -98,6 +60,16 @@ const sampleStories = [{
   },
   travelPeriod: "2 Feb - 4 Mar 2014",
   coverPhotoUrl: "https://cache-graphicslib.viator.com/graphicslib/thumbs360x240/2484/SITours/corcovado-mountain-and-christ-redeemer-statue-half-day-tour-in-rio-de-janeiro-128058.jpg",
+}, {
+  title: "First time in Spain",
+  city: "Madrid",
+  country: "Spain",
+  coordinates: {
+    latitude: 40.4167754,
+    longitude: -3.7037902,
+  },
+  travelPeriod: "15-28 Jan 2016",
+  coverPhotoUrl: "https://www.amawaterways.com/Assets/CruiseGallery/Large/provencespain_barcelona_parcguell_ss_407568172_gallery.jpg",
 }, {
   title: "Back home",
   city: "Seoul",
@@ -109,6 +81,68 @@ const sampleStories = [{
   travelPeriod: "17 Jul - 14 Oct 2017",
   coverPhotoUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Seoul-Namdaemun-at.night-02.jpg",
 }];
+
+const sampleStories2 = [{
+  title: "First time in Spain",
+  city: "Madrid",
+  country: "Spain",
+  coordinates: {
+    latitude: 40.4167754,
+    longitude: -3.7037902,
+  },
+  travelPeriod: "15-28 Jan 2016",
+  coverPhotoUrl: "https://www.amawaterways.com/Assets/CruiseGallery/Large/provencespain_barcelona_parcguell_ss_407568172_gallery.jpg",
+}, {
+  title: "Hola como estas",
+  city: "Rio de Janeiro",
+  country: "Brazil",
+  coordinates: {
+    latitude: -22.9068467,
+    longitude: -43.17289650000001,
+  },
+  travelPeriod: "2 Feb - 4 Mar 2014",
+  coverPhotoUrl: "https://cache-graphicslib.viator.com/graphicslib/thumbs360x240/2484/SITours/corcovado-mountain-and-christ-redeemer-statue-half-day-tour-in-rio-de-janeiro-128058.jpg",
+}, {
+  title: "Honeymoon in Africa",
+  city: "Cape Town",
+  country: "South Africa",
+  coordinates: {
+    latitude: -33.9248685,
+    longitude: 18.4240553,
+  },
+  travelPeriod: "24-30 Sep 2013",
+  coverPhotoUrl: "https://images.fineartamerica.com/images-medium-large/lions-head-sunset-johaar-bassier.jpg",
+}, {
+  title: "Back home",
+  city: "Seoul",
+  country: "South Korea",
+  coordinates: {
+    latitude: 37.566535,
+    longitude: 126.9779692,
+  },
+  travelPeriod: "17 Jul - 14 Oct 2017",
+  coverPhotoUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Seoul-Namdaemun-at.night-02.jpg",
+}, {
+  title: "Japan with besties",
+  city: "Tokyo",
+  country: "Japan",
+  coordinates: {
+    latitude: 35.7090259,
+    longitude: 139.7319925,
+  },
+  travelPeriod: "30 Jul - 15 Aug 2017",
+  coverPhotoUrl: "https://shoutem.github.io/static/getting-started/restaurant-3.jpg",
+}, {
+  title: "Backpacking in Straya",
+  city: "Melbourne",
+  country: "Australia",
+  coordinates: {
+    latitude: -37.81361100000001,
+    longitude: 144.963056,
+  },
+  travelPeriod: "20-27 Dec 2016",
+  coverPhotoUrl: "https://www.realestate.com.au/neighbourhoods/content/suburb/editorial/vic/melbourne-3000/intro01-2.jpg",
+}, ];
 
 const sampleKeywords = [{
   keyword: "Hiking",
@@ -163,7 +197,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       isEachStoryClicked: false,
-      stories: sampleStories,
+      stories1: sampleStories1,
+      stories2: sampleStories2,
       searchedStories: [],
       keywords: sampleKeywords,
       locations: sampleLocations,
@@ -173,27 +208,7 @@ export default class Home extends React.Component {
     }
   }
 
-  // searchText() {
-    // axios.post('http://localhost:5000/searchText', this.state.text)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err))
-    //
-    // fetch('http://localhost:5000/searchText', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ text: this.props.searchText }),
-    // }).then(res =>
-    //   this.props.showSearchedStories(JSON.parse(res._bodyText))
-    // );
-
-    // this.search.clearText()
-  // }
-
   returnData(location, tag) {
-
     const sendInfo = {
       tag,
       location,
@@ -216,7 +231,6 @@ export default class Home extends React.Component {
   }
 
   toggleSearchModal() {
-    // Actions.searchStory()
     this.props.navigation.navigate('searchStory', {returnData: this.returnData.bind(this)});
   }
 
@@ -231,6 +245,9 @@ export default class Home extends React.Component {
     console.log('clickedStoryIndex: ', this.state.clickedStoryIndex)
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <StatusBar
+          barStyle='dark-content'
+        />
         <Modal
           animationType="fade"
           transparent={false}
@@ -401,7 +418,7 @@ export default class Home extends React.Component {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item, index) => index}
-                  data={this.state.stories}
+                  data={this.state.stories1}
                   renderItem={({ item }) => {
                     return (
                       <ImageBackground
@@ -478,7 +495,7 @@ export default class Home extends React.Component {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   keyExtractor={(item, index) => index}
-                  data={this.state.stories}
+                  data={this.state.stories2}
                   renderItem={({ item }) => {
                     return (
                       <ImageBackground
@@ -562,7 +579,7 @@ export default class Home extends React.Component {
                       <View style={{ width: 150 }}>
                         <Image
                           style={{ width: 150 * 0.91, height: 120, borderRadius: 5 }}
-                          source={{ uri: item.imgUrl }}
+                          source={{uri: item.imgUrl}}
                         />
                         <Text style={{ fontFamily: 'Avenir', marginTop: 4, marginLeft: 3 }}>{item.keyword}</Text>
                       </View>
@@ -590,7 +607,7 @@ export default class Home extends React.Component {
                       <View style={{ width: 140 }}>
                         <Image
                           style={{ width: 140 * 0.91, height: 150 }}
-                          source={{ uri: item.imgUrl }}
+                          source={{uri: item.imgUrl}}
                         />
                         <Text style={{ fontFamily: 'Avenir', marginTop: 4, marginLeft: 3 }}>{item.location}</Text>
                       </View>

@@ -67,7 +67,6 @@ const loginUserSuccess = (dispatch, user) => {
   const sendInfo = {uid: user.uid}
 
   // RouterComponent -> Scen key ="List"
-  //return axios.post('http://ec2-52-78-128-96.ap-northeast-2.compute.amazonaws.com:5000/updateUserProfile', sendInfo)
   return axios.post('http://52.78.128.96:5000/updateUserProfile', sendInfo)
     .then((res) => {
       console.log(res.data);

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, StatusBar } from 'react-native';
 import { Icon, Button, FormLabel, FormInput } from 'react-native-elements';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import axios from 'react-native-axios';
@@ -31,6 +31,9 @@ export default class SearchStoryModal extends Component {
   render() {
     return (
       <View style={{ flex: 1, paddingTop: 25, backgroundColor: 'white' }}>
+        <StatusBar
+          barStyle='dark-content'
+        />
         <View style={{ position: 'relative', width: windowWidth, height: 30 }}>
           <View style={{ position: 'absolute', left: 8, justifyContent: 'center', alignItems: 'flex-start', width: 25, height: 25, zIndex: 10 }}>
             <Icon

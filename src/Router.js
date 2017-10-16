@@ -15,12 +15,10 @@ const headerStyle = {
   marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
 };
 
-
 const RouterComponent = () => {
-  let current = Actions.currentScene;
   return (
     <Router>
-      <Scene key="modal" modal>
+      <Scene key="modal">
         <Scene key="root" hideNavBar>
           <Scene key="auth">
             <Scene key="login" component={Login} hideNavBar />

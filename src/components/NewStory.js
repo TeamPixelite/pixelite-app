@@ -52,7 +52,6 @@ class NewStory extends Component {
     const user = { uid: userFirebase.uid, email: userFirebase.email };
     this.setState({ user: user });
     console.log('user information from Firebase: ', user);
-    console.log(Actions.currentScene, '<----', Actions.prevScene)
   }
 
   formattedDate(timestamp) {
@@ -69,7 +68,7 @@ class NewStory extends Component {
         maxFiles: 20,
         waitAnimationEnd: false,
         includeExif: true,
-      }).then( res => {
+      }).then(res => {
         const selectedPhotos = res;
         console.log('this is the res : ', res);
         const redefinedPhotos = selectedPhotos.map( photo => {
@@ -87,14 +86,11 @@ class NewStory extends Component {
         const nextSelectedPhotos = Object.assign({}, this.props.selectedPhotos);
 
         redefinedPhotos.forEach((photo) => {
-          const Android2 = (element) => element.url === photo.url;
-          const Ios2 = (element) => element.filename === photo.filename;
-          const func2 =  Platform.OS === 'android' ? Android2 : Ios2;
-
+          const androidFunc = (element) => element.url === photo.url;
           if (!Object.prototype.hasOwnProperty.call(nextSelectedPhotos, photo.date)) {
             nextSelectedPhotos[photo.date] = [];
           }
-          if (!nextSelectedPhotos[photo.date].find(func2)) {
+          if (!nextSelectedPhotos[photo.date].find(androidFunc)) {
             nextSelectedPhotos[photo.date].push(photo);
           }
         });
@@ -103,8 +99,7 @@ class NewStory extends Component {
 
         const firstAdd = this.props.dates.length === 0 ? true : false; // Is it the first time?
         this.props.newStoryGetPhotos(nextSelectedPhotos, firstAdd);
-
-      }) .catch(err => console.log(err));
+      }).catch(err => console.log(err));
     } else {
       //WHEN PLATFORM IS IOS
       Promise.all([
@@ -117,17 +112,13 @@ class NewStory extends Component {
           waitAnimationEnd: false,
           includeExif: true,
         }),
-      ]).then( res => {
+      ]).then(res => {
         const allPhotos = res[0].edges;
         const selectedPhotos = res[1];
-
         const redefinedPhotos = selectedPhotos.map((photo) => {
-
-          const Android1 = (item) => item.node.image.url === photo.url;
-          const Ios1 = (item) => item.node.image.filename === photo.filename;
-          const func1 = Platform.OS === 'android' ? Android1 : Ios1;
-
-          const { timestamp } = allPhotos.find(func1).node;
+          const { timestamp } = allPhotos.find((item) => {
+            return item.node.image.filename === photo.filename
+          }).node;
           console.log("this is timestamp : ", timestamp);
           return {
             filename: photo.filename,
@@ -142,36 +133,23 @@ class NewStory extends Component {
         const nextSelectedPhotos = Object.assign({}, this.props.selectedPhotos);
 
         redefinedPhotos.forEach((photo) => {
-          const Android2 = (element) => element.url === photo.url;
-          const Ios2 = (element) => element.filename === photo.filename;
-          const func2 =  Platform.OS === 'android' ? Android2 : Ios2;
-
+          const iosFunc = (element) => element.filename === photo.filename;
           if (!Object.prototype.hasOwnProperty.call(nextSelectedPhotos, photo.date)) {
             nextSelectedPhotos[photo.date] = [];
           }
-          if (!nextSelectedPhotos[photo.date].find(func2)) {
+          if (!nextSelectedPhotos[photo.date].find(iosFunc)) {
             nextSelectedPhotos[photo.date].push(photo);
           }
         });
 
         const firstAdd = this.props.dates.length === 0 ? true : false; // Is it the first time?
         this.props.newStoryGetPhotos(nextSelectedPhotos, firstAdd);
-
       }).catch(err => console.log(err));
     }
   }
 
-  renderImage(image) {
-    return <Image style={{width: 300, height: 300, resizeMode: 'contain'}} source={image} />
-  }
-
-  renderAsset(image) {
-    return this.renderImage(image);
-  }
-
   toggleStoryMap() {
     this.props.newStoryToggleStoryMap(this.props.isStoryMapClicked);
-    // this.setState({ isStoryMapClicked: !this.state.isStoryMapClicked });
   }
 
   toggleEditable() {
@@ -183,8 +161,6 @@ class NewStory extends Component {
   }
 
   cancelNewStory() {
-    console.log(Actions.currentScene)
-    console.log(Actions);
     Actions.pop();
   }
 
@@ -194,7 +170,7 @@ class NewStory extends Component {
       <View style={{ flex: 1, paddingTop: 25, backgroundColor: 'white' }}>
 {/*FIRST PAGE HEADING*/}
         <View style={{ position: 'relative', width: windowWidth, height: 40 }}>
-          <View style={{ position: 'absolute', left: 8, justifyContent: 'center', alignItems: 'flex-start', width: 38, height: 38, zIndex: 10 }}>
+          <View style={{ position: 'absolute', left: 8, justifyContent: 'center', alignItems: 'flex-start', width: 25, height: 25, zIndex: 10 }}>
             <Icon
               type="material-community"
               name="close"
@@ -218,8 +194,8 @@ class NewStory extends Component {
             Story Title
           </FormLabel>
           <FormInput
-            containerStyle={{ borderBottomWidth: 0.83, borderBottomColor: '#b5b5b5', width: windowWidth - 40, height: 33 }}
-            inputStyle={{ fontFamily: 'Avenir', fontSize: 15, color: 'black', paddingLeft: 5, paddingRight: 5, paddingTop: 4.5, paddingBottom: 4.5 }}
+            containerStyle={{ borderBottomWidth: 0.8, borderBottomColor: '#b5b5b5', height: 33 }}
+            inputStyle={{ fontFamily: 'Avenir', fontSize: 15, color: 'black', paddingLeft: 5, paddingRight: 5, paddingTop: 4.5, paddingBottom: 9 }}
             placeholder='e.g. Summer escapades in Australia'
             placeholderTextColor='#A8A8A8'
             value={this.props.titleValue}
@@ -228,7 +204,7 @@ class NewStory extends Component {
             selectionColor={'#4286f4'}
           />
           <Text style={{
-            fontFamily: 'Avenir', fontSize: 15, color: '#373535', marginTop: 15,
+            fontFamily: 'Avenir', fontSize: 15, color: '#373535', marginTop: 15, marginBottom: 3,
             marginLeft: 20, marginRight: 20
           }}>
             Where did you travel to?
@@ -251,16 +227,7 @@ class NewStory extends Component {
                   longitude: details.geometry.location.lng,
                 }
               };
-
               this.props.newStoryGooglePlacesAtuocomplete(locationInfo);
-              // this.setState({
-              //   selectedCity: data.description.split(', ')[0],
-              //   selectedCountry: data.description.split(', ')[data.description.split(', ').length - 1],
-              //   selectedCoordinates: {
-              //     latitude: details.geometry.location.lat,
-              //     longitude: details.geometry.location.lng,
-              //   }
-              // });
             }}
             getDefaultValue={() => {
               return ''; // text input default value
@@ -274,7 +241,7 @@ class NewStory extends Component {
             styles={{
               container: {
                 flex: 0,
-                marginTop: 10,
+                marginTop: 2,
                 marginLeft: 20,
                 marginRight: 20,
                 zIndex: 2,
@@ -285,9 +252,10 @@ class NewStory extends Component {
                 fontFamily: 'Avenir',
               },
               textInputContainer: {
-                height: 28.8,
+                height: 30,
                 borderTopWidth: 0,
                 borderBottomWidth: 0.8,
+                backgroundColor: 'transparent',
               },
               textInput: {
                 fontFamily: 'Avenir',
@@ -380,7 +348,7 @@ class NewStory extends Component {
                       color: 'white',
                       fontSize: 12,
                       paddingTop: 5,
-                      fontFamily: 'Avenir',
+                      fontFamily: 'AvenirNext-Italic',
                       backgroundColor: 'transparent',
                     }}>
                       {travelPeriod}
@@ -456,7 +424,7 @@ class NewStory extends Component {
                     name="arrow-left"
                     color="white"
                     size={26}
-                    onPress={() => {this.toggleStory(); this.setState({ selectedPhotos: {}, textValue: '' })}}
+                    onPress={() => this.toggleStory()}
                   />
                 </View>
                 <View style={{ flex: 1, alignItems: 'flex-end', top: 25, right: 12 }}>
@@ -467,11 +435,16 @@ class NewStory extends Component {
                     size={28}
                     onPress={() => Alert.alert(
                       'Upload story',
-                      'Are you sure you want to upload this story?',
-                      [
-                        { text: 'Nah', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-                        { text: 'Yes', onPress: () => { this.props.newStoryCreateStory(this.props); console.log('uploaded!') } }
-                      ]
+                      'Are you sure you want to upload this story?', [{
+                        text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'
+                      }, {
+                        text: 'Yes', onPress: () => {
+                          this.props.newStoryCreateStory(this.props);
+                          this.toggleStory();
+                          Actions.PROFILE();
+                          console.log('uploaded!');
+                        }
+                      }]
                     )}
                   />
                 </View>
@@ -495,18 +468,18 @@ class NewStory extends Component {
 {/* isTextEditable */}
               {!isTextEditable
                 ? <View style={{ alignItems: 'center', alignSelf: 'center', width: windowWidth - 50 }}>
-                    <Text style={{ color: '#707070', fontFamily: 'AvenirNext-Italic', fontSize: 14, textAlign: 'center' }}>
+                    <Text style={{ color: '#282626', fontFamily: 'Avenir', fontSize: 14, textAlign: 'center' }}>
                       {textValue}
                     </Text>
                     {textValue === ''
                       ? null
-                      : <Divider style={{ width: 20, height: 4, backgroundColor: '#f7d074', marginTop: 15, marginBottom: 25 }} />
+                      : <Divider style={{ width: 20, height: 3, backgroundColor: '#f7d074', marginTop: 15, marginBottom: 25 }} />
                     }
                   </View>
                 : <View style={{ justifyContent: 'flex-start', alignSelf: 'center', width: windowWidth - 30, height: 120, marginTop: 5, marginLeft: 20 }}>
                     <TextInput
                       style={{ width: windowWidth - 50, height: 100, borderColor: '#b5b5b5', borderWidth: 1, fontSize: 14,
-                              fontFamily: 'AvenirNext-Italic', padding: 10 }}
+                              fontFamily: 'Avenir', padding: 10 }}
                       placeholder='Add text...'
                       onChangeText={(textValue) => this.props.newStoryChangeTextEditableInput(textValue)}
                       value={textValue}
@@ -530,8 +503,8 @@ class NewStory extends Component {
                   dates.map(date => (
                     <View key={`entireView-${date}`} style={{ marginBottom: 18 }}>
                       <View key={`dateTextView-${date}`} style={{ flexDirection: 'column' }}>
-                        <Text style={{ color: '#282626', fontWeight: 'bold', fontFamily: 'Avenir', fontSize: 14, marginLeft: 20, marginBottom: 8 }}>{date}</Text>
-                        <Divider style={{ width: 15, height: 3, backgroundColor: '#282626', marginLeft: 20, marginBottom: 20 }} />
+                        <Text style={{ color: '#595757', fontWeight: 'bold', fontFamily: 'AvenirNext-Italic', fontSize: 13, marginLeft: 20, marginBottom: 4 }}>{date}</Text>
+                        <Divider style={{ width: 15, height: 2, backgroundColor: '#595757', marginLeft: 20, marginBottom: 20 }} />
                       </View>
                       <PhotoGrid
                         allPhotosla={selectedPhotos}

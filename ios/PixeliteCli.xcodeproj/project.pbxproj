@@ -52,6 +52,7 @@
 		BAD3A4C51F6F5B4100B2B3F2 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD3A4BA1F6F5B4100B2B3F2 /* SimpleLineIcons.ttf */; };
 		BAD3A4C61F6F5B4100B2B3F2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD3A4BB1F6F5B4100B2B3F2 /* Zocial.ttf */; };
 		CF988E7B5AEE48EC8E35B59C /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 802F5602FEB145AAB9BEBB50 /* libimageCropPicker.a */; };
+		D8049BA0D83A4FD0BCF0714D /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F92A8A0F9F74CA58788CEB5 /* libBVLinearGradient.a */; };
 		EF3195711F8B1D11009356A8 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF3195701F8B1CA2009356A8 /* libRCTCameraRoll.a */; };
 		F87FB5666D0718ABDA13861D /* libPods-PixeliteCli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3BB700FED2C945C7CBE7B4 /* libPods-PixeliteCli.a */; };
 /* End PBXBuildFile section */
@@ -260,6 +261,20 @@
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
 		};
+		BA2ED74C1F8D152800CEEA96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D02998676864ACE8A22E053 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		BA2ED74E1F8D152800CEEA96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7D02998676864ACE8A22E053 /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
 		BA4E49821F6BC60F0082B573 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DCCBBDC6A38449DAD6BCFE8 /* imageCropPicker.xcodeproj */;
@@ -330,6 +345,7 @@
 		00E356F21AD99517003FC87E /* PixeliteCliTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PixeliteCliTests.m; sourceTree = "<group>"; };
 		0A3BB700FED2C945C7CBE7B4 /* libPods-PixeliteCli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PixeliteCli.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8D60C4BB1A4DA1936803B6 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		0F92A8A0F9F74CA58788CEB5 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PixeliteCli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixeliteCli.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,6 +369,7 @@
 		7088D834FD7D4C58A8C8D85A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7C7E580B2EA04E6BBEBC6D04 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		7D02998676864ACE8A22E053 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		802F5602FEB145AAB9BEBB50 /* libimageCropPicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libimageCropPicker.a; sourceTree = "<group>"; };
 		815FE8EE35B4C462AADA0FD5 /* libPods-PixeliteCli-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PixeliteCli-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -412,6 +429,7 @@
 				F87FB5666D0718ABDA13861D /* libPods-PixeliteCli.a in Frameworks */,
 				67C7FBC22EE94770B52AD78B /* libRNVectorIcons.a in Frameworks */,
 				A27FD4FCEBB041C999B682E9 /* libAirMaps.a in Frameworks */,
+				D8049BA0D83A4FD0BCF0714D /* libBVLinearGradient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +616,7 @@
 				5DCCBBDC6A38449DAD6BCFE8 /* imageCropPicker.xcodeproj */,
 				4151B33CEB9648AE92847BD4 /* RNVectorIcons.xcodeproj */,
 				5AA8AB038E9E443BA61EA6FD /* AirMaps.xcodeproj */,
+				7D02998676864ACE8A22E053 /* BVLinearGradient.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -622,6 +641,7 @@
 				FC2E7E6A853A6C3B751E03DA /* Pods */,
 				32512464249F8FEDD8F37D08 /* Frameworks */,
 				FF648D8237114E8689AB33C1 /* Resources */,
+				BA85CAEF1F93823200DF4629 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -656,12 +676,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BA2ED7471F8D152800CEEA96 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA2ED74D1F8D152800CEEA96 /* libBVLinearGradient.a */,
+				BA2ED74F1F8D152800CEEA96 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BA4E497F1F6BC60E0082B573 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				BA4E49831F6BC60F0082B573 /* libimageCropPicker.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BA85CAEF1F93823200DF4629 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				802F5602FEB145AAB9BEBB50 /* libimageCropPicker.a */,
+				A003A31BD86140F6A389CC1F /* libRNVectorIcons.a */,
+				E476241473564EB8AAB7EC68 /* libAirMaps.a */,
+				0F92A8A0F9F74CA58788CEB5 /* libBVLinearGradient.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		BAAF5E131F6CB383004FF679 /* Products */ = {
@@ -817,6 +857,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 6F9T7HA2LG;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -843,6 +886,10 @@
 				{
 					ProductGroup = BA02E70C1F6F86240079A075 /* Products */;
 					ProjectRef = 5AA8AB038E9E443BA61EA6FD /* AirMaps.xcodeproj */;
+				},
+				{
+					ProductGroup = BA2ED7471F8D152800CEEA96 /* Products */;
+					ProjectRef = 7D02998676864ACE8A22E053 /* BVLinearGradient.xcodeproj */;
 				},
 				{
 					ProductGroup = BA4E497F1F6BC60E0082B573 /* Products */;
@@ -1103,6 +1150,20 @@
 			fileType = archive.ar;
 			path = libAirMaps.a;
 			remoteRef = BA02E70F1F6F86240079A075 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA2ED74D1F8D152800CEEA96 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = BA2ED74C1F8D152800CEEA96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BA2ED74F1F8D152800CEEA96 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = BA2ED74E1F8D152800CEEA96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BA4E49831F6BC60F0082B573 /* libimageCropPicker.a */ = {
@@ -1371,12 +1432,14 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = PixeliteCliTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1406,12 +1469,14 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = PixeliteCliTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1435,6 +1500,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 6F9T7HA2LG;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
@@ -1443,6 +1510,7 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = PixeliteCli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1451,6 +1519,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.PixeliteCli1011;
 				PRODUCT_NAME = PixeliteCli;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1462,6 +1531,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6F9T7HA2LG;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
@@ -1470,6 +1541,7 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = PixeliteCli/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1478,6 +1550,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.PixeliteCli1011;
 				PRODUCT_NAME = PixeliteCli;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1503,11 +1576,13 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "PixeliteCli-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1547,11 +1622,13 @@
 					"$(SRCROOT)/../node_modules/react-native-exif/ios/ReactNativeExif",
 					"$(SRCROOT)/../node_modules/react-native-media-meta/ios/RNMediaMeta",
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 				);
 				INFOPLIST_FILE = "PixeliteCli-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1592,6 +1669,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.PixeliteCli-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1616,6 +1694,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
