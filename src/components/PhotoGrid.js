@@ -1,6 +1,6 @@
-/* eslint-disable */
+/* eslint-disable react/jsx-filename-extension, max-len */
 import React, { Component } from 'react';
-import { Alert, Button, View, Image, Dimensions, Modal, TouchableOpacity, Text, ScrollView, StatusBar } from 'react-native';
+import { Alert, View, Image, Dimensions, Modal, TouchableOpacity, Text, StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Gallery from 'react-native-image-gallery';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -9,19 +9,66 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as PhotoGridActions from '../actions';
-import { GOOGLE_PLACES_API_KEY } from '../../apis'
-
-// import { GOOGLE_PLACES_API_KEY } from '../../apis';
-
+import { GOOGLE_PLACES_API_KEY } from '../../apis';
 
 const windowWidth = Dimensions.get('window').width;
+
+const styles = {
+  container: {
+    flex: 1,
+    paddingTop: 0,
+    paddingBottom: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageStyle: {
+    width: View.width,
+    height: 120,
+    resizeMode: 'cover',
+  },
+  flexCol: {
+    flexDirection: 'column',
+    flex: 1,
+  },
+  alignCenter: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: windowWidth,
+  },
+  photoView: {
+    height: 120,
+    flex: 2,
+    backgroundColor: 'white',
+    marginHorizontal: 1,
+    marginVertical: 1,
+    justifyContent: 'center',
+  },
+  expandedView: {
+    height: 249,
+    backgroundColor: 'white',
+    marginHorizontal: 1,
+    marginVertical: 1,
+    flex: 2,
+  },
+  expandedImage: {
+    height: 249,
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+  },
+};
 
 class PhotoGrid extends Component {
   constructor(props) {
     super(props);
-    console.log("THIS IS THE ALLPHOTOS FROM PROPS : ", this.props.allPhotosla);
+    console.log('THIS IS THE ALLPHOTOS FROM PROPS : ', this.props.allPhotosla);
     this.state = {
-      allPhotos: this.changeToSlide(this.props.allPhotosla),
+      allPhotos: this.changeToSlide(this.props.allPhotosla, this.props.datesFromNewStory),
       currentPhotoUrl: '',
       currentPhotoIndex: 0,
       photoModalVisible: false,
@@ -30,15 +77,15 @@ class PhotoGrid extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      allPhotos: this.changeToSlide(nextProps.allPhotosla),
-    })
+      allPhotos: this.changeToSlide(nextProps.allPhotosla, nextProps.datesFromNewStory),
+    });
   }
 
-  changeToSlide(object) {
-    console.log("THIS IS THE OBJECT :", object);
-    console.log("ThIS IS THE DATE : ", this.props.dates)
+  changeToSlide(object, dates) {
+    console.log('THIS IS THE OBJECT :', object);
+    console.log('ThIS IS THE DATE : ', dates)
     const result = [];
-    this.props.dates.forEach(date => {
+    dates.forEach(date => {
       object[date].forEach(({ url, location }) => {
         result.push({
           source: {
@@ -66,10 +113,10 @@ class PhotoGrid extends Component {
           return true;
         }
       })
-      console.log("THIS IS INSDE! ARRAY" , array, " STATES CURRENT URL ", currentPhotoUrl );
+      console.log('THIS IS INSDE! ARRAY' , array, ' STATES CURRENT URL ', currentPhotoUrl );
       return index;
     }
-    console.log("THIS IS GETTING CHENGESD!!! : ", getIndexFromSlide(this.state.allPhotos));
+    console.log('THIS IS GETTING CHENGESD!!! : ', getIndexFromSlide(this.state.allPhotos));
 
     this.setState({
       currentPhotoUrl,
@@ -86,7 +133,7 @@ class PhotoGrid extends Component {
   deletePhoto(currentPhotoUrl) {
     const {dates, selectedPhotos} = this.props;
     if (dates.length === 1 && selectedPhotos[dates[0]].length === 1) {
-      console.log("CANNOT DELETE");
+      console.log('CANNOT DELETE');
       Alert.alert(
         'Cannot delete photo',
         'You should have at least one photo in your story',
@@ -96,7 +143,7 @@ class PhotoGrid extends Component {
       );
       return;
     } else {
-      console.log("WILL DELETE")
+      console.log('WILL DELETE')
       this.props.photoGridDeletePhoto(currentPhotoUrl);
     }
     if (this.props.photosList.length) {
@@ -502,64 +549,14 @@ class PhotoGrid extends Component {
           </Modal>
         </View>
       </View>
-    )
+    );
   }
-}
-
-const styles = {
-  container: {
-    flex: 1,
-    paddingTop: 0,
-    paddingBottom: 18,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  imageStyle: {
-    width: View.width,
-    height: 120,
-    resizeMode: 'cover'
-  },
-  flexCol: {
-    flexDirection: 'column',
-    flex: 1
-  },
-  alignCenter: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth,
-  },
-  photoView: {
-    height: 120,
-    flex: 2,
-    backgroundColor: 'white',
-    marginHorizontal: 1,
-    marginVertical: 1,
-    justifyContent: 'center'
-  },
-  expandedView: {
-    height: 249,
-    backgroundColor: 'white',
-    marginHorizontal: 1,
-    marginVertical: 1,
-    flex: 2
-  },
-  expandedImage: {
-    height: 249,
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
-  },
 }
 
 const mapStateToProps = ({ auth, newStory, photoGrid }) => {
   const { user } = auth;
-  return { user, ...newStory, ...photoGrid};
-}
+  return { user, ...newStory, ...photoGrid };
+};
 
 const matchDispatchToProps = dispatch => bindActionCreators(PhotoGridActions, dispatch);
 

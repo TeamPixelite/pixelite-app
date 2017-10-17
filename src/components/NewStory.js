@@ -1,20 +1,15 @@
-/* eslint-disable no-whitespace-before-property, arrow-parens */
+/* eslint-disable no-whitespace-before-property, arrow-parens, react/jsx-filename-extension, max-len */
 // REACT NATIVE IMPORTS
 import React, { Component } from 'react';
-import { Platform, StyleSheet, View, ScrollView, Text, TextInput, Image, ImageBackground, TouchableOpacity, NativeModules, CameraRoll, Modal, StatusBar, Dimensions, Alert } from 'react-native';
+import { Platform, View, Text, TextInput, ImageBackground, NativeModules, CameraRoll, Modal, StatusBar, Dimensions, Alert } from 'react-native';
 import { Icon, Button, FormLabel, FormInput, Divider } from 'react-native-elements';
-import { RNS3 } from 'react-native-aws3';
-import { GOOGLE_PLACES_API_KEY, AWS_ACCESS_KEY, AWS_SECRET_KEY } from '../../apis';
-// import { API_KEY, API_SECRET } from 'react-native-dotenv';
-
 
 // REDUX IMPORTS & AUTH
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
-import * as NewStoryActions from '../actions';
 import * as firebase from 'firebase';
-
+import * as NewStoryActions from '../actions';
 
 // FOLLOWING ARE IMPORTS FROM JENNY
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -22,18 +17,10 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import PhotoGrid from './PhotoGrid';
 import StoryMapModal from './StoryMapModal';
 
+import { GOOGLE_PLACES_API_KEY } from '../../apis';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 const windowWidth = Dimensions.get('window').width;
-const options = {
-  keyPrefix: "uploads/",
-  bucket: "pixelite-s3-oregon",
-  region: "us-west-2",
-  accessKey: AWS_ACCESS_KEY,
-  secretKey: AWS_SECRET_KEY,
-  successActionStatus: 201
-}
-
 
 class NewStory extends Component {
   constructor(props) {
@@ -44,7 +31,8 @@ class NewStory extends Component {
       images: null,
       user: null,
       sendData: null,
-    }
+      cityEntered: false,
+    };
   }
 
   componentDidMount() {
@@ -59,9 +47,16 @@ class NewStory extends Component {
     const month = timestamp.toString().split(' ')[1];
     const year = timestamp.getFullYear().toString();
     return `${day} ${month} ${year}`;
-  };
+  }
 
   pickMultiple() {
+    if (this.state.cityEntered === false) {
+      Alert.alert(
+        'Waaaaiiittt a moment',
+        'Have you forgot to select a city? \nTell others wonders of your location!'
+      );
+      return;
+    }
     if (Platform.OS === 'android') {
       ImagePicker.openPicker({
         multiple: true,
@@ -72,7 +67,7 @@ class NewStory extends Component {
         const selectedPhotos = res;
         console.log('this is the res : ', res);
         const redefinedPhotos = selectedPhotos.map( photo => {
-          const datetime = photo.exif.DateTime.split(" ")[0].split(":").map( (e,i) => { return i === 1 ? Number(e) - 1 : Number(e) });
+          const datetime = photo.exif.DateTime.split(' ')[0].split(':').map( (e,i) => { return i === 1 ? Number(e) - 1 : Number(e) });
           console.log(datetime);
           return {
             url: photo.path,
@@ -117,9 +112,9 @@ class NewStory extends Component {
         const selectedPhotos = res[1];
         const redefinedPhotos = selectedPhotos.map((photo) => {
           const { timestamp } = allPhotos.find((item) => {
-            return item.node.image.filename === photo.filename
+            return item.node.image.filename === photo.filename;
           }).node;
-          console.log("this is timestamp : ", timestamp);
+          console.log('this is timestamp : ', timestamp);
           return {
             filename: photo.filename,
             url: photo.path,
@@ -228,6 +223,7 @@ class NewStory extends Component {
                 }
               };
               this.props.newStoryGooglePlacesAtuocomplete(locationInfo);
+              this.setState({ cityEntered: true });
             }}
             getDefaultValue={() => {
               return ''; // text input default value
@@ -509,6 +505,7 @@ class NewStory extends Component {
                       <PhotoGrid
                         allPhotosla={selectedPhotos}
                         photosList={selectedPhotos[date]}
+                        datesFromNewStory={dates}
                       />
                     </View>
                   ))
