@@ -3,12 +3,15 @@ import ProfileReducer from './ProfileReducer';
 import AuthReducer from './AuthReducer';
 import NewStoryReducer from './NewStoryReducer';
 import HomeReducer from './HomeReducer';
-import PhotoGrid from './PhotoGridReducer';
+import PhotoGridReducer from './PhotoGridReducer';
 
-export default combineReducers({
-  auth: AuthReducer,
-  profile: ProfileReducer,
-  newStory: NewStoryReducer,
-  home: HomeReducer,
-  photoGrid: PhotoGrid,
-});
+export default function getRootReducer(navReducer) {
+  return combineReducers({
+    nav: navReducer,
+    auth: AuthReducer,
+    profile: ProfileReducer,
+    newStory: NewStoryReducer,
+    home: HomeReducer,
+    photoGrid: PhotoGridReducer,
+  });
+}

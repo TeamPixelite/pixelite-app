@@ -1,12 +1,10 @@
 /* eslint-disable */
 import React from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Text, View, StatusBar } from 'react-native';
 import { Icon, Button } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient';
 import * as ActionsFunctions from '../actions';
-
 import FloatingLabelInput from './common/FloatingLabelInput';
 
 const styles = {
@@ -58,7 +56,7 @@ class SignUp extends React.Component {
           name="arrow-left"
           color="white"
           size={24}
-          onPress={() => Actions.pop()}
+          onPress={() => this.props.navigation.goBack()}
         />
       </View>
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { View, Text, Image, StatusBar } from 'react-native';
 import { Button } from 'react-native-elements'
@@ -22,15 +21,18 @@ class Login extends Component {
   onEmailChange(text) {
     this.props.emailChanged(text); // emailChanged -> action creator
   }
+
   onPasswordChange(text) {
     this.props.passwordChanged(text);
   }
+
   onButtonPress() {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });
   }
+
   onSignUpButtonPress() {
-    Actions.signup();
+    this.props.navigation.navigate('SignUp');
   }
 
   render() {

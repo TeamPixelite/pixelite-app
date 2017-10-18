@@ -288,7 +288,7 @@ class EachPhotoGrid extends Component {
 
   getIndexFromSlide(allPhotos) {
     let index;
-    allPhotos.find((element,i) => {
+    allPhotos.find((element, i) => {
       if (element.source.uri === this.props.currentPhotoUrl) {
         index = i;
         return true;
@@ -365,7 +365,6 @@ class EachPhotoGrid extends Component {
                 />
               </View> */}
 {/* Gallery Starts */}
-                {console.log("CURRENT PHOTO INDEX : " ,this.props.currentPhotoIndex )}
                 <Gallery
                   style={{ backgroundColor: '#2d2d2d' }}
                   images={this.state.allPhotos}

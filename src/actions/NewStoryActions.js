@@ -13,6 +13,7 @@ import {
   NEWSTORY_TOGGLE_TEXT_EDITABLE,
   NEWSTORY_CHANGE_TEXT_EDITABLE_INPUT,
   NEWSTORY_TOGGLE_STORY,
+  NEWSTORY_CLEAR_EVERYTHING,
 } from './types';
 
 
@@ -22,6 +23,12 @@ const updateStory = (dispatch, updatedStory) => {
     type: NEWSTORY_UPDATED_STORIES,
     payload: updatedStory,
   });
+};
+
+export const clearEverything = () => {
+  return {
+    type: NEWSTORY_CLEAR_EVERYTHING,
+  }
 };
 
 export const newstoryToggleStory = () => {
@@ -85,7 +92,6 @@ export const newStoryCreateStory = (props) => {
     newStory.items[i].url = urls[i];
   }
 
-
   return (dispatch) => {
     Promise.all(promises)
       .then(() => {
@@ -100,11 +106,11 @@ export const newStoryCreateStory = (props) => {
             user: props.user,
           }),
         })
-          .then((res) => {
-            const bodyText = JSON.parse(res._bodyText);
-            console.log('createNewStory, received bodyText:', bodyText);
-            updateStory(dispatch, bodyText);
-          }).catch(err => console.log('createNewStory err!: ', err));
+        .then((res) => {
+          const bodyText = JSON.parse(res._bodyText);
+          console.log('createNewStory, received bodyText:', bodyText);
+          updateStory(dispatch, bodyText);
+        }).catch(err => console.log('createNewStory err!: ', err));
       });
   };
 };
