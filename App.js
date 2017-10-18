@@ -5,6 +5,7 @@ import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk'; // middleware
+import { GOOGLE_FIREBASE_API_KEY } from './apis';
 import reducers from './src/reducers'; // getting combined reducers
 import { RootNavigator } from './src/Router';
 import NavigatorService from './src/Navigator';
@@ -43,11 +44,10 @@ const store = createStore(
 const mapStateToProps = state => ({nav: state.nav})
 const Wrapped = connect(mapStateToProps)(AppNavigationWithState);
 
-
 class App extends Component {
   componentWillMount() {
     const config = {
-      apiKey: 'AIzaSyDscedGD6dyCL7cZ56kWOvz0LsXMjp4cyU',
+      apiKey: GOOGLE_FIREBASE_API_KEY,
       authDomain: 'manager-c381e.firebaseapp.com',
       databaseURL: 'https://manager-c381e.firebaseio.com',
       projectId: 'manager-c381e',
