@@ -7,7 +7,9 @@ In short, this is a react-native travel stories sharing application with followi
  - automatically image tagging system
  - creates travel stories conveniently    
  - supports both iOS and Android
-
+ 
+### Demo
+https://youtu.be/g7AQh_2K9ac
 
 # Getting Started
 
