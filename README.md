@@ -14,18 +14,20 @@ In short, this is a react-native travel stories sharing application with followi
 1. install React Native CLI following the instructions below
 https://facebook.github.io/react-native/docs/getting-started.html
 
-2. run npm install to download the packages
+2. run **npm install** to download the packages
 
-3. depending on your platform
-- iOS: **react-native run-ios**
-- Android: **react-native run-android**
+3. run **react-native link**
+
+4. depending on your platform
+- iOS: run **react-native run-ios**
+- Android: run **react-native run-android**
 
 # Attention
 
 ## Client Side
 
 This app utilizes multiple API keys which are used to access login and provide geo location informations.
-Inside project folder create a javascript file named "apis.js" with following template. You will need to get your own api keys from Google and Amazon Web Service.
+Inside project folder create a javascript file named **"apis.js"** with following template. You will need to get your own api keys from Google and Amazon Web Service.
 
 <pre><code>
 exports.GOOGLE_GEOCODING_API_KEY = "*****************************";
@@ -37,7 +39,7 @@ exports.AWS_SECRET_KEY = "*****************************";
 
 ### Only Android
 
-Inside android -> src -> main -> AndroidManifest.xml 
+Inside android -> src -> main -> **AndroidManifest.xml**
 
 inside ```<application>``` 
 add
