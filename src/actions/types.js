@@ -29,6 +29,8 @@ export const NEWSTORY_TOGGLE_STORY_MAP = 'newstory_toggle_story_map';
 export const NEWSTORY_TOGGLE_TEXT_EDITABLE = 'newstory_toggle_text_editable';
 export const NEWSTORY_CHANGE_TEXT_EDITABLE_INPUT = 'newstory_change_text_editable_input';
 export const NEWSTORY_TOGGLE_STORY = 'newstory_toggle_story';
+export const NEWSTORY_CLEAR_EVERYTHING = 'newstory_clear_everything';
+
 
 // PhotoGrid
 export const PHOTOGRID_TOGGLE_PHOTO_POPUP = 'photogrid_toggle_photo_popup';

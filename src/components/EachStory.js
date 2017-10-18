@@ -11,7 +11,6 @@ import { Icon, Button, FormLabel, FormInput, Divider } from 'react-native-elemen
 // REDUX IMPORTS & AUTH
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Actions } from 'react-native-router-flux';
 import * as NewStoryActions from '../actions';
 // import * as firebase from 'firebase';
 
@@ -71,7 +70,6 @@ class EachStory extends Component {
 
   toggleStoryMap() {
     this.props.newStoryToggleStoryMap(this.props.isStoryMapClicked);
-    // this.setState({ isStoryMapClicked: !this.state.isStoryMapClicked });
   }
 
   toggleEditable() {
@@ -84,7 +82,7 @@ class EachStory extends Component {
   }
 
   // cancelNewStory() {
-  //   Actions.pop();
+  //   this.props.navigation.goBack();
   // }
 
   render() {
@@ -223,7 +221,7 @@ class EachStory extends Component {
                 name="close"
                 color="white"
                 size={26}
-                onPress={() => this.props.toggleModal()}
+                onPress={() => this.toggleStory()}
               />
             </View>
             <View style={{ flex: 1, alignItems: 'flex-end', top: 25, right: 12 }}>

@@ -3,21 +3,19 @@
 import React, { Component } from 'react';
 import { Platform, View, Text, TextInput, ImageBackground, NativeModules, CameraRoll, Modal, StatusBar, Dimensions, Alert } from 'react-native';
 import { Icon, Button, FormLabel, FormInput, Divider } from 'react-native-elements';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
+
+import PhotoGrid from './PhotoGrid';
+import StoryMapModal from './StoryMapModal';
+import { GOOGLE_PLACES_API_KEY } from '../../apis';
 
 // REDUX IMPORTS & AUTH
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Actions } from 'react-native-router-flux';
-import * as firebase from 'firebase';
 import * as NewStoryActions from '../actions';
+import * as firebase from 'firebase';
 
-// FOLLOWING ARE IMPORTS FROM JENNY
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import PhotoGrid from './PhotoGrid';
-import StoryMapModal from './StoryMapModal';
-
-import { GOOGLE_PLACES_API_KEY } from '../../apis';
 
 const ImagePicker = NativeModules.ImageCropPicker;
 const windowWidth = Dimensions.get('window').width;
@@ -66,14 +64,14 @@ class NewStory extends Component {
       }).then(res => {
         const selectedPhotos = res;
         console.log('this is the res : ', res);
-        const redefinedPhotos = selectedPhotos.map( photo => {
-          const datetime = photo.exif.DateTime.split(' ')[0].split(':').map( (e,i) => { return i === 1 ? Number(e) - 1 : Number(e) });
+        const redefinedPhotos = selectedPhotos.map(photo => {
+          const datetime = photo.exif.DateTime.split(' ')[0].split(':').map((e,i) => { return i === 1 ? Number(e) - 1 : Number(e) });
           console.log(datetime);
           return {
             url: photo.path,
             width: photo.width,
             height: photo.height,
-            date: this.formattedDate( new Date( (new Date ()).setFullYear(...datetime) )),
+            date: this.formattedDate(new Date((new Date()).setFullYear(...datetime))),
             location: null,
           };
         })
@@ -156,7 +154,8 @@ class NewStory extends Component {
   }
 
   cancelNewStory() {
-    Actions.pop();
+    this.props.navigation.goBack();
+    this.props.clearEverything();
   }
 
   render() {
@@ -193,7 +192,7 @@ class NewStory extends Component {
             inputStyle={{ fontFamily: 'Avenir', fontSize: 15, color: 'black', paddingLeft: 5, paddingRight: 5, paddingTop: 4.5, paddingBottom: 9 }}
             placeholder='e.g. Summer escapades in Australia'
             placeholderTextColor='#A8A8A8'
-            value={this.props.titleValue}
+            value={titleValue}
             onChangeText={(titleValue) => this.props.newStoryChangeTitleInput(titleValue)}
             maxLength={35}
             selectionColor={'#4286f4'}
@@ -405,7 +404,7 @@ class NewStory extends Component {
                   color: 'white',
                   fontSize: 18,
                   fontFamily: 'Avenir'
-                }}>{this.props.titleValue}</Text>
+                }}>{titleValue}</Text>
               </View>
             )}
 
@@ -436,8 +435,8 @@ class NewStory extends Component {
                       }, {
                         text: 'Yes', onPress: () => {
                           this.props.newStoryCreateStory(this.props);
-                          this.toggleStory();
-                          Actions.PROFILE();
+                          this.props.clearEverything();
+                          this.props.navigation.navigate('Profile');
                           console.log('uploaded!');
                         }
                       }]

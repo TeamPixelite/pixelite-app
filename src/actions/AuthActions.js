@@ -1,7 +1,7 @@
 // Action Creator
 import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import axios from 'react-native-axios';
+import NavigatorService from '../Navigator';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -24,12 +24,14 @@ const updateStories = (dispatch, updatedStories, name) => {
     name: name,
   });
 };
-const loginUserFail = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAIL });
-};
+
 const signUpUserFail = (dispatch, errorMessage) => {
   console.log('signUpUserFail!: ', errorMessage);
   dispatch({ type: SIGNUP_USER_FAIL, payload: errorMessage });
+};
+
+const loginUserFail = (dispatch) => {
+  dispatch({ type: LOGIN_USER_FAIL });
 };
 
 const signUpUserSuccess = (dispatch, user, name) => {
@@ -48,8 +50,7 @@ const signUpUserSuccess = (dispatch, user, name) => {
   console.log(sendInfo);
 
   return axios.post('http://52.78.128.96:5000/updateUserProfile', sendInfo)
-  // axios.post('http://10.130.106.229:5000/updateUserProfile', sendInfo)
-    .then(() => Actions.main())
+    .then(() => NavigatorService.navigate('SignedIn'))
     .then(() => {
       updateStories(dispatch, [], name);
     })
@@ -72,7 +73,7 @@ const loginUserSuccess = (dispatch, user) => {
       console.log(res.data);
       updateStories(dispatch, res.data.stories, res.data.profile.name);
     })
-    .then(() => Actions.main());
+    .then(() => NavigatorService.navigate('SignedIn'));
 };
 
 export const nameChanged = (text) => {

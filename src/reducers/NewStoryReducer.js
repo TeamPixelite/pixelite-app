@@ -10,6 +10,7 @@ import {
   PHOTOGRID_DELETE_PHOTO,
   PHOTOGRID_UPDATE_LOCATION,
   NEWSTORY_TOGGLE_STORY,
+  NEWSTORY_CLEAR_EVERYTHING,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -102,7 +103,7 @@ const deletePhoto = (state, photoUrl) => {
   const nextDates = compareDates(updatedSelectedPhotos);
   const nextTravelPeriod = getTravelPeriod(nextDates);
 
-  console.log("UPDATESSSSS : ",updatedSelectedPhotos);
+  console.log("UPDATES : ",updatedSelectedPhotos);
 
   return {
     selectedPhotos: updatedSelectedPhotos,
@@ -188,6 +189,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, story: action.payload };
     case NEWSTORY_TOGGLE_STORY:
       return { ...INITIAL_STATE, selectedCity: state.selectedCity, selectedCountry: state.selectedCountry, titleValue: state.titleValue };
+    case NEWSTORY_CLEAR_EVERYTHING:
+      return { ...INITIAL_STATE };
     case NEWSTORY_GET_PHOTOS:
       return { ...state, ...newStoryChange(state, action) };
     case NEWSTORY_GOOGLE_PLACES_AUTOCOMPLETE:

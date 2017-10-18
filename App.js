@@ -1,20 +1,49 @@
 /* global window */
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { addNavigationHelpers } from 'react-navigation';
+import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk'; // middleware
 import { GOOGLE_FIREBASE_API_KEY } from './apis';
 import reducers from './src/reducers'; // getting combined reducers
-import Router from './src/Router';
+import { RootNavigator } from './src/Router';
+import NavigatorService from './src/Navigator';
 
-/* eslint-disable no-underscore-dangle */
+// --------------- Navigation --------------
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(
-  applyMiddleware(ReduxThunk),
-));
-/* eslint-enable */
+const navReducer = (state, action) => {
+  const newState = RootNavigator.router.getStateForAction(action, state);
+  return newState || state;
+};
+
+class AppNavigationWithState extends Component {
+  render() {
+    return (
+      <RootNavigator
+        ref={navigatorRef => {
+          NavigatorService.setContainer(navigatorRef);
+        }}
+        navigation={addNavigationHelpers({
+          dispatch: this.props.dispatch,
+          state: this.props.nav,
+        })} />
+    );
+  }
+}
+
+const store = createStore(
+  reducers(navReducer),
+  /* preloadedState, */
+  composeEnhancers(
+    applyMiddleware(ReduxThunk),
+  ),
+);
+
+const mapStateToProps = state => ({nav: state.nav})
+const Wrapped = connect(mapStateToProps)(AppNavigationWithState);
+
 class App extends Component {
   componentWillMount() {
     const config = {
@@ -27,13 +56,15 @@ class App extends Component {
     };
     firebase.initializeApp(config);
   }
+
   render() {
     return (
       <Provider store={store}>
-        <Router />
+        <Wrapped />
       </Provider>
     );
   }
 }
+
 
 export default App;

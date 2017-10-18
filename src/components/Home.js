@@ -231,7 +231,7 @@ export default class Home extends React.Component {
   }
 
   toggleSearchModal() {
-    this.props.navigation.navigate('searchStory', {returnData: this.returnData.bind(this)});
+    this.props.navigation.navigate('SearchStoryModal', {returnData: this.returnData.bind(this)});
   }
 
   toggleEachStoryModal() {
