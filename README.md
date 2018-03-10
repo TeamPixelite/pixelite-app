@@ -9,7 +9,8 @@ These are some of the features Pixelite can offer:
 - check out other people's stories by searching for a location(city, country, or name of a specific place) and/or a keyword(e.g. surfing, mountain, food) that you're interested in
  
 ### Demo
-bit.ly/pixelite_demo
+https://bit.ly/pixelite_demo
+
 
 # Getting started
 
@@ -23,9 +24,10 @@ bit.ly/pixelite_demo
 - iOS: **react-native run-ios**
 - Android: **react-native run-android**
 
+
 # Attention
 
-## Client side
+## Client-side
 
 Pixelite utilizes multiple API keys that are used to access login and geolocation information. In order to run the app, create a file named **"apis.js"** under the project folder with the following template. You will need to get your own API keys from Google and AWS.
 
@@ -34,9 +36,11 @@ exports.GOOGLE_PLACES_API_KEY = "*****************************";
 exports.GOOGLE_FIREBASE_API_KEY = "*****************************";
 exports.AWS_ACCESS_KEY = "*****************************";
 exports.AWS_SECRET_KEY = "*****************************";
+
 </pre></code>
 
-## Server side
+
+## Server-side
 
 1. Go to PixeliteServer > config, and create a file named **"dev.js"** with the following template. You can get your MongoDB URI after going through the steps in 'Quick-Start Guide to mLab'(http://docs.mlab.com/).
 
@@ -48,6 +52,7 @@ module.exports = {
 
 2. Configure AWS
 http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
+
 
 ## Any questions or feedback?
 
