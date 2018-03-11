@@ -25,8 +25,6 @@ https://bit.ly/pixelite_demo
 - Android: **react-native run-android**
 
 
-# Attention
-
 ## Client-side
 
 Pixelite utilizes multiple API keys that are used to access login and geolocation information. In order to run the app, create a file named **"apis.js"** under the project folder with the following template. You will need to get your own API keys from Google and AWS.
@@ -51,6 +49,6 @@ module.exports = {
 ```
 
 
-## Any questions or feedback?
+# Any questions or feedback?
 
 Feel free to drop us an email at pixelite1010@gmail.com!
