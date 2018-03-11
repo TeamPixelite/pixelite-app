@@ -42,16 +42,13 @@ exports.AWS_SECRET_KEY = "*****************************";
 
 ## Server-side
 
-1. Go to PixeliteServer > config, and create a file named **"dev.js"** with the following template. You can get your MongoDB URI after going through the steps in 'Quick-Start Guide to mLab'(http://docs.mlab.com/).
+Go to PixeliteServer > config, and create a file named **"dev.js"** with the following template. You can get your MongoDB URI after going through the steps in 'Quick-Start Guide to mLab'(http://docs.mlab.com/).
 
 ```
 module.exports = {
   mongoURI: ‘mongodb://*****:*****@******.mlab.com:*****/your-projectname’,
 };
 ```
-
-2. Configure AWS
-http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 
 
 ## Any questions or feedback?
